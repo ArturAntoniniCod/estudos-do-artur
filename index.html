@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>{{pessoa.nome}}</p>
+    <p>{{pessoa.idade}}</p>
+    <p>{{pessoa.telefone}}</p>
+    {%if pessoa.idade>18%}
+    <p>é maior de idade</p>
+    {%else%}
+    <p>é menor de idade</p>    
+    {%endif%}
+</body>
+</html>
