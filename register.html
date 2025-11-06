@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro Simples</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="wrap">
+        <h1>Cadastro de Aluno</h1>
+
+        <form action="/adicionar" method="POST" class="form">
+            <input name="nome" type="text" placeholder="Nome" required>
+            <input name="idade" type="number" placeholder="Idade" required>
+            <input name="email" type="email" placeholder="E-mail" required>
+            <input name="telefone" type="text" placeholder="telefone" required>
+            <input name="id" type="number" placeholder="id" required>
+             <input name="RG" type="text" placeholder="RG" required>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <h2>Alunos Cadastrados</h2>
+    
+            <ul class="list">
+              {%for i in pessoa %}
+                <p>{{i.nome}}</p>
+                <p>{{i.idade}}</p>
+                <p>{{i.telefone}}</p>
+                <p>{{i.id}}</p>
+                <p>{{i.email}}</p>
+               <p>{{i.RG}}</p>
+               {%endfor%}
+                <li></li>
+             
+            </ul>
+       
+            <p>Nenhum aluno cadastrado.</p>
+            
+       
+    </div>
+</body>
+</html>
