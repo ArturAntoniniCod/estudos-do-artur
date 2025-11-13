@@ -1,7 +1,21 @@
 from flask import Flask,render_template, request, redirect, url_for
-
+import sqlite3
 app= Flask(__name__)
-
+def init_db():
+    sql=sqlite3.connect('alunos.db')
+    cursor=sql.cursor()
+    cursor.execute('''
+                   CREATE TABLE alunos(
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   nome TEXT NOT NULL,
+                   idade INTEGER NOT NULL
+                   )
+                   
+                   
+                   ''')
+    sql.commit()
+    sql.close()
+init_db()
 alunos=[ {
     'nome':'Gabriel',
     'idade':26,
@@ -27,13 +41,19 @@ def index():
 
 @app.route('/adicionar',methods=['POST'])
 def adicionar():
-    nome= request.form['nome']
+    nome= float(request.form['nome'])
     idade = request.form['idade']
     telefone=request.form['telefone']
     id=request.form['id']
     email=request.form['email']
     RG=request.form['RG']
 
-    alunos.append({'nome':nome,'idade':idade,'telefone':telefone,'id':id,'email':email,'RG':RG})
-    return redirect(url_for('index'))
+
+    sql=sqlite3.connect('alunos.db')
+    cursor=sql.cursor()
+    cursor.execute('INSERT INTO alunos (nome,idade,telefone,email,RG)VALUES(?,?)',(nome,idade,telefone,id,email,RG))
+    sql.commit()
+    sql.close()
+    return redirect(url_for('register'))
+
 app.run(debug=True)
